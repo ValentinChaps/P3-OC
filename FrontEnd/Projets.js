@@ -18,5 +18,18 @@ function genererProjets(projets){
         projetElement.appendChild(titreElement)
     }
 }
-
 genererProjets(projets)
+
+const lesCatergories = projets.map(projet => projet.category)
+console.log(lesCatergories)
+
+
+// const boutonObjet = document.querySelector("#objets")
+
+// boutonObjet.addEventListener("click", function (){
+//     const projetsFiltres = projets.filter(function(projet){
+//         return projet.works = "name : Objets"
+//     })
+//     document.querySelector(".gallery").innerHTML = ""
+//     genererProjets(projetsFiltres)
+// })
