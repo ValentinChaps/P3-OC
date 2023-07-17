@@ -20,16 +20,35 @@ function genererProjets(projets){
 }
 genererProjets(projets)
 
-const lesCatergories = projets.map(projet => projet.category)
-console.log(lesCatergories)
 
+const boutonToutMesProjets = document.querySelector("#toutMesProjets")
+boutonToutMesProjets.addEventListener("click", function (){
+    genererProjets(projets)
+})
 
-// const boutonObjet = document.querySelector("#objets")
+const boutonObjet = document.querySelector("#objets")
+boutonObjet.addEventListener("click", function (){
+    const projetsFiltres = projets.filter(function(projet){
+        return projet.categoryId === 1
+    })
+    document.querySelector(".gallery").innerHTML = ""
+    genererProjets(projetsFiltres)
+})
 
-// boutonObjet.addEventListener("click", function (){
-//     const projetsFiltres = projets.filter(function(projet){
-//         return projet.works = "name : Objets"
-//     })
-//     document.querySelector(".gallery").innerHTML = ""
-//     genererProjets(projetsFiltres)
-// })
+const boutonAppartements = document.querySelector("#appartements")
+boutonAppartements.addEventListener("click", function (){
+    const projetsFiltres = projets.filter(function(projet){
+        return projet.categoryId === 2
+    })
+    document.querySelector(".gallery").innerHTML = ""
+    genererProjets(projetsFiltres)
+})
+
+const boutonHotelsEtRestaurants = document.querySelector("#hotelsEtRestaurants")
+boutonHotelsEtRestaurants.addEventListener("click", function (){
+    const projetsFiltres = projets.filter(function(projet){
+        return projet.categoryId === 3
+    })
+    document.querySelector(".gallery").innerHTML = ""
+    genererProjets(projetsFiltres)
+})

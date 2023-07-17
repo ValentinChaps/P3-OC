@@ -58,6 +58,11 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+
+a{
+	text-decoration: none;
+	color: black;
+}
 section {
 	margin: 50px 0
 }
@@ -197,5 +202,38 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+#connexion {
+	text-align: center;
+}
+
+#connexion label {
+	justify-content: center;
+	display: flex;
+}
+
+#labelE-mail{
+	margin-right: 260px;
+	margin-top: 20px;
+	margin-bottom: 7px;
+}
+
+#labelMotDePasse{
+	margin-right: 215px;
+	margin-top: 20px;
+	margin-bottom: 7px;
+}
+
+#connexion #e-mail, #motDePasse{
+	padding: 8px 0px;
+	font-size: 28px;
+	border: 0;
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#connexion button{
+	display: flex;
+	align-items: flex-end;
 }
 
