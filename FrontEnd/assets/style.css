@@ -63,6 +63,11 @@ a{
 	text-decoration: none;
 	color: black;
 }
+
+a:hover{
+	color: #B1663C
+}
+
 section {
 	margin: 50px 0
 }
@@ -139,6 +144,27 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+#filtres{
+	text-align: center;
+}
+
+#portfolio button{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: #1D6154;
+	background-color: white;
+	width: auto;
+	padding: 5px 20px;
+	text-align: center;
+	border-radius: 60px ;
+	margin: 40px 5px;
+}
+
+#portfolio button:hover{
+	color: white;
+	background-color: #1D6154;
+}
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
@@ -204,13 +230,18 @@ footer nav ul {
 	margin: 2em
 }
 
-#connexion {
-	text-align: center;
+#login-nav{
+	font-weight: bold;
 }
 
-#connexion label {
-	justify-content: center;
+#connexion {
+	text-align: center;
 	display: flex;
+	flex-direction: column;
+}
+
+#connexion label, input {
+	justify-content: center;
 }
 
 #labelE-mail{
@@ -223,6 +254,7 @@ footer nav ul {
 	margin-right: 215px;
 	margin-top: 20px;
 	margin-bottom: 7px;
+	
 }
 
 #connexion #e-mail, #motDePasse{
@@ -230,10 +262,17 @@ footer nav ul {
 	font-size: 28px;
 	border: 0;
 	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin: auto;
 }
 
 #connexion button{
-	display: flex;
-	align-items: flex-end;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
 }
 

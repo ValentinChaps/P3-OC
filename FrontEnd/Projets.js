@@ -23,6 +23,7 @@ genererProjets(projets)
 
 const boutonToutMesProjets = document.querySelector("#toutMesProjets")
 boutonToutMesProjets.addEventListener("click", function (){
+    document.querySelector(".gallery").innerHTML = ""
     genererProjets(projets)
 })
 
