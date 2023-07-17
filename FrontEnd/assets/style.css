@@ -152,13 +152,17 @@ li:hover {
 #portfolio button{
 	font-family: 'Syne';
 	font-weight: 700;
+	font-size: 18px;
 	color: #1D6154;
 	background-color: white;
 	width: auto;
+	border: 1px #1D6154 solid;
 	padding: 5px 20px;
 	text-align: center;
 	border-radius: 60px ;
-	margin: 40px 5px;
+	margin-top: 10px;
+	margin-bottom: 50px;
+	margin-right: 5px;
 }
 
 #portfolio button:hover{
