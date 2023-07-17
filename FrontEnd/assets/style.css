@@ -280,3 +280,7 @@ footer nav ul {
 	border-radius: 60px ;
 }
 
+#messageErreur{
+	color: red;
+}
+
