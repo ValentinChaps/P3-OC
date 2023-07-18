@@ -284,3 +284,16 @@ footer nav ul {
 	color: red;
 }
 
+#encadreNoir{
+	display: flex;
+	margin: 20px;
+	padding: 20px;
+	justify-content: center;
+	background-color: black;
+	color: white;
+	width: 100%;
+}
+#encadreNoir p{
+	padding: 10px;
+}
+
