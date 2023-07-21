@@ -153,8 +153,6 @@ li:hover {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 18px;
-	color: #1D6154;
-	background-color: white;
 	width: auto;
 	border: 1px #1D6154 solid;
 	padding: 5px 20px;
@@ -173,6 +171,27 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+#toutMesProjets{
+	color: #1D6154;
+	background-color: white;
+}
+
+#appartements{
+	color: #1D6154;
+	background-color: white;
+}
+
+#objets{
+	color: #1D6154;
+	background-color: white;
+}
+
+#hotelsEtRestaurants{
+	color: #1D6154;
+	background-color: white;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -285,7 +304,7 @@ footer nav ul {
 }
 
 #encadreNoir{
-	display: flex;
+	display: none;
 	margin: 20px;
 	padding: 20px;
 	justify-content: center;
