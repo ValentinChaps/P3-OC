@@ -34,6 +34,7 @@ boutonToutMesProjets.addEventListener("click", function (){
     document.querySelector(".gallery").innerHTML = ""
     genererProjets(projets)
 })
+
 const boutonObjet = document.querySelector("#objets")
 boutonObjet.addEventListener("click", function (){
     const Objets = document.querySelector("#objets")
@@ -47,7 +48,6 @@ boutonObjet.addEventListener("click", function (){
     const projetsFiltres = projets.filter(function(projet){
         return projet.categoryId === 1
     })
-    
     document.querySelector(".gallery").innerHTML = ""
     genererProjets(projetsFiltres)
 })
@@ -90,5 +90,7 @@ const token = localStorage.getItem("token")
 if (token) {
     const encadreNoir = document.querySelector("#encadreNoir")
     encadreNoir.style.display = "flex"
+    const header = document.querySelector("header")
+    header.style.margin = "100px 0"
 }
 console.log(token)
