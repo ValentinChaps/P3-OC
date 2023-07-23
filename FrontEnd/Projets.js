@@ -92,5 +92,14 @@ if (token) {
     encadreNoir.style.display = "flex"
     const header = document.querySelector("header")
     header.style.margin = "100px 0"
+    const barreFiltres = document.querySelector("#filtres")
+    barreFiltres.style.display = "none"
+    const titreMesProjets = document.querySelector("#titreMesProjets")
+    titreMesProjets.style.margin = "80px"
+    const boutonModifier = document.querySelectorAll(".boutonModifier")
+    boutonModifier.forEach(boutonModifier => {
+        boutonModifier.style.display = "inline"
+    })
+    
 }
 console.log(token)

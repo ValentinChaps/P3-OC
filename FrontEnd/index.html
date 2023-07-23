@@ -7,6 +7,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/fc868ffeb8.js" crossorigin="anonymous"></script>
 	<meta name="description" content="">
 	<script type="module" src="./Projets.js"></script>
 	<link rel="stylesheet" href="./assets/style.css">
@@ -14,7 +15,7 @@
 <body>
 <header>
 	<div id="encadreNoir">
-		<p>Mode édition</p>
+		<p><i class="fa-regular fa-pen-to-square"></i>Mode édition</p>
 		<p>publier les changements</p>
 	</div>
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
@@ -31,6 +32,7 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
+			<button class="boutonModifier"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -40,7 +42,7 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<h2 id="titreMesProjets">Mes Projets<button class="boutonModifier"><i class="fa-regular fa-pen-to-square"></i>modifier</button></h2>
 		<div id="filtres">
 			<button id="toutMesProjets">Tous</button>
 			<button id="objets">Objets</button>
