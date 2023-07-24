@@ -2,6 +2,25 @@ let modal = null
 const focusaleSelector ="button, a, input, textarea"
 let focusables =[]
 
+const reponse = await fetch('http://localhost:5678/api/works');
+const projets = await reponse.json();
+
+function genererProjetsAModifier(projets){
+    for (let i = 0; i < projets.length; i++){
+        const article = projets[i]
+        const projetsAModifier = document.querySelector(".projetsAModifier")
+        const projetElements = document.createElement("div")
+        const imageElements = document.createElement("img")
+        imageElements.src = article.imageUrl
+        const titreElements = document.createElement("figcaption")
+        titreElements.innerText = 'éditer'
+
+        projetsAModifier.appendChild(projetElements)
+        projetElements.appendChild(imageElements)
+        projetElements.appendChild(titreElements)
+    }
+}
+
 const openModal = async function (e) {
     e.preventDefault()
     const target = e.target.getAttribute("href")
@@ -18,7 +37,7 @@ const openModal = async function (e) {
     modal.addEventListener("click", closeModal)
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
     modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
-
+    genererProjetsAModifier(projets)
 }
 
 const closeModal = function (e) {
