@@ -10,7 +10,7 @@
 	<script src="https://kit.fontawesome.com/fc868ffeb8.js" crossorigin="anonymous"></script>
 	<meta name="description" content="">
 	<script type="module" src="./Projets.js"></script>
-	<script type="module" src="./modal.js"></script>
+	<script type="module" src="./modale.js"></script>
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
@@ -43,8 +43,21 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2 id="titreMesProjets">Mes Projets<button class="boutonModifier"><a href="modal.html#modal2" class="js-modal"><i class="fa-regular fa-pen-to-square"></i>modifier</a></button></h2>
-		
+		<h2 id="titreMesProjets">Mes Projets<button class="boutonModifier"><a href="#modal1" class="js-modal"><i class="fa-regular fa-pen-to-square"></i>modifier</a></button></h2>
+		<aside id="modal2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titleModal" style="display: none;">
+			<div class="modal-wrapper js-modal-stop">
+			<button class="js-modal-close">Fermer</button>
+			<h2 id="titleModal">Designer d'espace</h2>
+			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
+			<input type="text" name="" id="">
+			<input type="text" name="" id="">
+			<input type="text" name="" id="">
+			<input type="text" name="" id="">
+            <input type="text" name="" id=""><input type="text" name="" id=""><input type="text" name="" id="">
+			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+			</div>
+		</aside>
 		<div id="filtres">
 			<button id="toutMesProjets">Tous</button>
 			<button id="objets">Objets</button>
