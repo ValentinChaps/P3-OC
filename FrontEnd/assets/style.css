@@ -341,6 +341,14 @@ footer nav ul {
 	
 }
 #encadreNoir p{
-	padding: 10px;
+	padding: 12px;
+	margin-right: 10px;
+}
+
+#publierChangement{
+	margin: 0;
+	border-radius: 30px;
+	padding: 10px 20px;
+	font-weight: bold;	
 }
 
