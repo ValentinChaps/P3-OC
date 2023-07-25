@@ -386,19 +386,21 @@ footer nav ul {
 	justify-content: center;
 	color: black;
 	font-weight: lighter;
+	margin-bottom: 60px;
 }
 
 .projetsAModifier{
 	width: 100%;
+	max-width: 80%;
 	display: grid;
 	grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
 	grid-column-gap: 0px;
 	grid-row-gap: 8px;
+	margin: auto;
+	overflow: auto;
 }
 
 .projetsAModifier img{
-	width: 70%;
-	margin: 0;
-	padding: 0;
+	width: 90%;
 }
 
