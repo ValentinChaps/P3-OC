@@ -391,7 +391,7 @@ footer nav ul {
 
 .projetsAModifier{
 	width: 100%;
-	max-width: 80%;
+	max-width: 75%;
 	display: grid;
 	grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
 	grid-column-gap: 0px;
@@ -404,3 +404,39 @@ footer nav ul {
 	width: 90%;
 }
 
+.projetsAModifier img+figcaption{
+	margin-bottom: 0px;
+}
+
+.fa-trash-can{
+	position: relative;
+	bottom: 120px;
+	left: 65px
+}
+
+.boutonsAjouterSupprimer{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	width: fit-content;
+	margin-left: 180px;
+}
+
+.ajouterPhoto{
+	font-family: 'Syne';
+	border: 1px #1D6154 solid;
+	padding: 8px 35px;
+	border-radius: 60px ;
+	color: white;
+	background-color:#1D6154 ;
+	margin-top: 50px;
+}
+
+.supprimerGalerie{
+	font-family: 'Syne';
+	padding: 5px 35px;
+	text-decoration: none;
+	color: red;
+	background-color:white;
+	border: none;
+}

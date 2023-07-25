@@ -14,10 +14,14 @@ function genererProjetsAModifier(projets){
         imageElements.src = article.imageUrl
         const titreElements = document.createElement("figcaption")
         titreElements.innerText = 'éditer'
+        const trashCanIcon = document.createElement("i")
+        trashCanIcon.classList.add("fa-regular", "fa-trash-can")
+        
 
         projetsAModifier.appendChild(projetElements)
         projetElements.appendChild(imageElements)
         projetElements.appendChild(titreElements)
+        projetElements.appendChild(trashCanIcon)
     }
 }
 
