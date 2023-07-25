@@ -366,11 +366,12 @@ footer nav ul {
 .modal-wrapper{
 	background-color: white;
 	width: 600px;
-	height: 600px;
+	height: 750px;
 	padding: 20px;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh- 20px);
 	overflow: auto;
+	border-radius: 15px;
 }
 
 .js-modal-close{
@@ -387,4 +388,17 @@ footer nav ul {
 	font-weight: lighter;
 }
 
+.projetsAModifier{
+	width: 100%;
+	display: grid;
+	grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
+	grid-column-gap: 0px;
+	grid-row-gap: 8px;
+}
+
+.projetsAModifier img{
+	width: 70%;
+	margin: 0;
+	padding: 0;
+}
 
