@@ -1,9 +1,17 @@
-let modal = null
-const focusaleSelector ="button, a, input, textarea"
-let focusables =[]
-
 const reponse = await fetch('http://localhost:5678/api/works');
 const projets = await reponse.json();
+
+const token = localStorage.getItem("token")
+
+async function supprimerProjet(id) {
+      const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+        method: "DELETE",
+        headers :{
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json", 
+      },  
+  })
+}
 
 function genererProjetsAModifier(projets){
     for (let i = 0; i < projets.length; i++){
@@ -16,14 +24,28 @@ function genererProjetsAModifier(projets){
         titreElements.innerText = 'éditer'
         const trashCanIcon = document.createElement("i")
         trashCanIcon.classList.add("fa-regular", "fa-trash-can")
-        
 
+        projetElements.setAttribute("data-id", article.id)
+        const trashCanIcons = document.querySelectorAll(".fa-trash-can");
+        trashCanIcons.forEach((trashCanIcon) => {
+          trashCanIcon.addEventListener("click", () => {
+            const projetElement = trashCanIcon.closest("[data-id]");
+            const projetId = projetElement.getAttribute("data-id")
+            supprimerProjet(projetId)
+        })});
+            
+        
         projetsAModifier.appendChild(projetElements)
         projetElements.appendChild(imageElements)
         projetElements.appendChild(titreElements)
         projetElements.appendChild(trashCanIcon)
     }
 }
+
+
+let modal = null
+const focusaleSelector ="button, a, input, textarea"
+let focusables =[]
 
 const openModal = async function (e) {
     e.preventDefault()

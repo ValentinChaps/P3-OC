@@ -398,6 +398,9 @@ footer nav ul {
 	grid-row-gap: 8px;
 	margin: auto;
 	overflow: auto;
+	border-bottom: 3px solid rgb(201, 189, 189) ;
+	padding-bottom: 30px;
+	margin-bottom: 40px;
 }
 
 .projetsAModifier img{
@@ -410,7 +413,7 @@ footer nav ul {
 
 .fa-trash-can{
 	position: relative;
-	bottom: 120px;
+	bottom: 118px;
 	left: 65px
 }
 
@@ -429,7 +432,6 @@ footer nav ul {
 	border-radius: 60px ;
 	color: white;
 	background-color:#1D6154 ;
-	margin-top: 50px;
 }
 
 .supprimerGalerie{
