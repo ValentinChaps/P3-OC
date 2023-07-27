@@ -9,7 +9,7 @@ async function supprimerProjet(id) {
         headers :{
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json", 
-      },  
+      }, 
   })
 }
 
@@ -64,6 +64,19 @@ const openModal = async function (e) {
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
     modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
     genererProjetsAModifier(projets)
+
+    const ajouterPhotoButton = modal.querySelector("#ajouterPhotoButton")
+    ajouterPhotoButton.addEventListener("click", ajouterPhoto)
+   
+}
+
+const ajouterPhoto = async function (e) {
+    e.preventDefault()
+    // Load the new content from newContent.html
+    const newContent = await loadModal("ajouterPhoto.html#modal3")
+    const modalAjouterPhoto = document.querySelector("#modalSupprimerPhoto")
+    modalAjouterPhoto.innerHTML = ""
+    modal.appendChild(newContent)
 }
 
 const closeModal = function (e) {
@@ -106,6 +119,7 @@ const loadModal = async function (url) {
     if(existingModal !== null) return existingModal
     const html = await fetch(url).then(response => response.text())
     const element = document.createRange().createContextualFragment(html).querySelector(target)
+    if (element === null) throw `L'élément ${target} n'a pas été trouvé dans la page ${url}`
     document.body.append(element)
     return element
 }
