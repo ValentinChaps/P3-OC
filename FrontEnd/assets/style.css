@@ -442,3 +442,44 @@ footer nav ul {
 	background-color:white;
 	border: none;
 }
+
+.modalAjouterPhoto{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.uploadPhoto{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 200px;
+	width: 450px;
+	background-color: rgb(199, 226, 226);
+}
+
+.fa-image{
+	margin-bottom: 20px;
+}
+
+.bouttonAjouterPhoto{
+	padding: 12px 50px;
+	border-radius: 30px;
+	background-color: rgb(127, 183, 193);
+}
+
+.bouttonAjouterPhoto{
+	margin-top: 70px;
+}
+
+.uploadTitreCategorie{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.inputPhoto{
+	display: none;
+}

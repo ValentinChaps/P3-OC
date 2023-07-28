@@ -72,7 +72,6 @@ const openModal = async function (e) {
 
 const ajouterPhoto = async function (e) {
     e.preventDefault()
-    // Load the new content from newContent.html
     const newContent = await loadModal("ajouterPhoto.html#modal3")
     const modalAjouterPhoto = document.querySelector("#modalSupprimerPhoto")
     modalAjouterPhoto.innerHTML = ""
