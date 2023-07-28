@@ -1,10 +1,9 @@
 const reponse = await fetch('http://localhost:5678/api/works');
 const projets = await reponse.json();
 
-const token = localStorage.getItem("token")
-
 async function supprimerProjet(id) {
-      const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+    const token = localStorage.getItem("token")
+    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
         method: "DELETE",
         headers :{
             Authorization: `Bearer ${token}`,
@@ -50,11 +49,7 @@ let focusables =[]
 const openModal = async function (e) {
     e.preventDefault()
     const target = e.target.getAttribute("href")
-    if (target.startsWith("#")){
-        modal = document.querySelector(target)
-    } else{
-        modal = await loadModal(target)
-    }
+    modal = await loadModal(target)
     focusables = Array.from(modal.querySelectorAll(focusaleSelector))
     focusables[0].focus()
     modal.style.display = null
@@ -63,20 +58,27 @@ const openModal = async function (e) {
     modal.addEventListener("click", closeModal)
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
     modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
+    if (modalSupprimerPhoto.style.display = "none"){
+        modalSupprimerPhoto.style.display = "block"
+    }
     genererProjetsAModifier(projets)
 
     const ajouterPhotoButton = modal.querySelector("#ajouterPhotoButton")
-    ajouterPhotoButton.addEventListener("click", ajouterPhoto)
-   
+    const modalAjouterPhoto = document.querySelector(".modalAjouterPhoto")
+    modalAjouterPhoto.style.display = "none"
+    ajouterPhotoButton.addEventListener("click", () => {
+        modalAjouterPhoto.style.display = "block"
+        const modalSupprimerPhoto = document.querySelector("#modalSupprimerPhoto")
+        modalSupprimerPhoto.style.display = "none"
+    })
+    const boutonArrow = document.querySelector(".fa-arrow-left")
+    boutonArrow.addEventListener("click", () =>{
+        modalAjouterPhoto.style.display = "none"
+        modalSupprimerPhoto.style.display = "block"
+    })
+
 }
 
-const ajouterPhoto = async function (e) {
-    e.preventDefault()
-    const newContent = await loadModal("ajouterPhoto.html#modal3")
-    const modalAjouterPhoto = document.querySelector("#modalSupprimerPhoto")
-    modalAjouterPhoto.innerHTML = ""
-    modal.appendChild(newContent)
-}
 
 const closeModal = function (e) {
     if (modal === null) return
