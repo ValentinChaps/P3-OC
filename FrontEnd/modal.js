@@ -1,9 +1,16 @@
-let modal = null
-const focusaleSelector ="button, a, input, textarea"
-let focusables =[]
-
 const reponse = await fetch('http://localhost:5678/api/works');
 const projets = await reponse.json();
+
+async function supprimerProjet(id) {
+    const token = localStorage.getItem("token")
+    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+        method: "DELETE",
+        headers :{
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json", 
+      }, 
+  })
+}
 
 function genererProjetsAModifier(projets){
     for (let i = 0; i < projets.length; i++){
@@ -14,21 +21,35 @@ function genererProjetsAModifier(projets){
         imageElements.src = article.imageUrl
         const titreElements = document.createElement("figcaption")
         titreElements.innerText = 'éditer'
+        const trashCanIcon = document.createElement("i")
+        trashCanIcon.classList.add("fa-regular", "fa-trash-can")
 
+        projetElements.setAttribute("data-id", article.id)
+        const trashCanIcons = document.querySelectorAll(".fa-trash-can");
+        trashCanIcons.forEach((trashCanIcon) => {
+          trashCanIcon.addEventListener("click", () => {
+            const projetElement = trashCanIcon.closest("[data-id]");
+            const projetId = projetElement.getAttribute("data-id")
+            supprimerProjet(projetId)
+        })});
+            
+        
         projetsAModifier.appendChild(projetElements)
         projetElements.appendChild(imageElements)
         projetElements.appendChild(titreElements)
+        projetElements.appendChild(trashCanIcon)
     }
 }
+
+
+let modal = null
+const focusaleSelector ="button, a, input, textarea"
+let focusables =[]
 
 const openModal = async function (e) {
     e.preventDefault()
     const target = e.target.getAttribute("href")
-    if (target.startsWith("#")){
-        modal = document.querySelector(target)
-    } else{
-        modal = await loadModal(target)
-    }
+    modal = await loadModal(target)
     focusables = Array.from(modal.querySelectorAll(focusaleSelector))
     focusables[0].focus()
     modal.style.display = null
@@ -37,8 +58,27 @@ const openModal = async function (e) {
     modal.addEventListener("click", closeModal)
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
     modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
+    if (modalSupprimerPhoto.style.display = "none"){
+        modalSupprimerPhoto.style.display = "block"
+    }
     genererProjetsAModifier(projets)
+
+    const ajouterPhotoButton = modal.querySelector("#ajouterPhotoButton")
+    const modalAjouterPhoto = document.querySelector(".modalAjouterPhoto")
+    modalAjouterPhoto.style.display = "none"
+    ajouterPhotoButton.addEventListener("click", () => {
+        modalAjouterPhoto.style.display = "block"
+        const modalSupprimerPhoto = document.querySelector("#modalSupprimerPhoto")
+        modalSupprimerPhoto.style.display = "none"
+    })
+    const boutonArrow = document.querySelector(".fa-arrow-left")
+    boutonArrow.addEventListener("click", () =>{
+        modalAjouterPhoto.style.display = "none"
+        modalSupprimerPhoto.style.display = "block"
+    })
+
 }
+
 
 const closeModal = function (e) {
     if (modal === null) return
@@ -80,6 +120,7 @@ const loadModal = async function (url) {
     if(existingModal !== null) return existingModal
     const html = await fetch(url).then(response => response.text())
     const element = document.createRange().createContextualFragment(html).querySelector(target)
+    if (element === null) throw `L'élément ${target} n'a pas été trouvé dans la page ${url}`
     document.body.append(element)
     return element
 }
