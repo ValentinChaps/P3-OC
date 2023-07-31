@@ -493,6 +493,25 @@ footer nav ul {
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding-left: 10px;
+}
+
+.uploadTitreCategorie select{
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding-left: 10px;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+	border-radius: 4px;
+	background: url(icons/arrowDropDown.jpg) right no-repeat;
+}
+
+option{
+	font-family: 'Work Sans';
+	color: black;
 }
 
 .uploadTitreCategorie label{
@@ -519,4 +538,8 @@ footer nav ul {
 	padding: 8px 90px;
 	text-align: center;
 	border-radius: 60px;
+}
+
+option .fa-chevron-down{
+	color: gray;
 }
