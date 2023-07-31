@@ -29,10 +29,10 @@
 			<div class="modalAjouterPhoto">
 				<i class="fa-solid fa-arrow-left fa-xl"></i>
 				<h2 id="titleModal">Ajout photo</h2>
-					<div class="uploadPhoto">
+					<div class="uploadPhoto" id="output">
 						<i class="fa-regular fa-image fa-5x"></i>
-						<label for="files" class="bouttonAjouterPhoto"><i class="fa-solid fa-plus"></i> Ajouter photo</label>
-						<input class="inputPhoto" id="files" type="file" accept="image/png, image/jpeg">
+						<label for="input" class="bouttonAjouterPhoto"><i class="fa-solid fa-plus"></i> Ajouter photo</label>
+						<input class="inputPhoto" id="input" type="file" accept="image/png, image/jpeg">
 						<p>jpg, png : 4mo max</p>
 					</div>
 					<div class="uploadTitreCategorie">
@@ -47,7 +47,7 @@
 							<option value="hotelsEtRestaurants">Hôtels & restaurants</option>
 						</select>
 					</div>
-					<div class="boutonValider">
+					<div class="boutonValider" id="creerProjetBtn">
 						<button >Valider</button>
 					</div>
 				</div>
