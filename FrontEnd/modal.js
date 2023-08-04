@@ -1,8 +1,9 @@
 const reponse = await fetch('http://localhost:5678/api/works');
 const projets = await reponse.json();
 
+const token = localStorage.getItem("token")
+
 async function supprimerProjet(id) {
-    const token = localStorage.getItem("token")
     const response = await fetch(`http://localhost:5678/api/works/${id}`, {
         method: "DELETE",
         headers :{
@@ -23,6 +24,8 @@ function genererProjetsAModifier(projets){
         titreElements.innerText = 'éditer'
         const trashCanIcon = document.createElement("i")
         trashCanIcon.classList.add("fa-regular", "fa-trash-can")
+        const fondNoir = document.createElement("div")
+        fondNoir.id = "fondNoir"
 
         projetElements.setAttribute("data-id", article.id)
         const trashCanIcons = document.querySelectorAll(".fa-trash-can");
@@ -38,6 +41,7 @@ function genererProjetsAModifier(projets){
         projetElements.appendChild(imageElements)
         projetElements.appendChild(titreElements)
         projetElements.appendChild(trashCanIcon)
+        trashCanIcon.appendChild(fondNoir)
     }
 }
 
@@ -110,6 +114,10 @@ const openModal = async function (e) {
                 fetch("http://localhost:5678/api/works", {
                     method: "POST",
                     body: formData,
+                    headers :{
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "multipart/form-data", 
+                  }, 
                 })
                 .then(res => res.json())
                 .catch(err => console.log(err))

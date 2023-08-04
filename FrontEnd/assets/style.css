@@ -407,6 +407,7 @@ footer nav ul {
 
 .projetsAModifier img{
 	width: 90%;
+	z-index: 1;
 }
 
 .projetsAModifier img+figcaption{
@@ -416,8 +417,19 @@ footer nav ul {
 .fa-trash-can{
 	position: relative;
 	bottom: 118px;
-	left: 65px
+	left: 65px;
+	z-index: 2;
 }
+
+#fondNoir{
+	width: 10px;
+  	height: 10px;
+  	background-color: black;
+	position: relative;
+	bottom: 8px;
+	z-index: 1;
+}
+
 
 .boutonsAjouterSupprimer{
 	display: flex;
