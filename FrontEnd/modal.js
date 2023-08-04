@@ -101,27 +101,29 @@ const openModal = async function (e) {
     //   });
       const form = document.querySelector("#form")
 
-        form.addEventListener("submit", ajouterProjet)
-
-            function ajouterProjet(e) {
+        form.addEventListener("submit", function(e){
                 e.preventDefault()
-                const formData = new FormData(form)
-                const title = formData.get("title")
-                const image = formData.get("image")
-                const category = formData.get("category")
                 
-                console.log("projet", {title}, {image}, {category})
+                const fileInput = document.getElementById('input');
+                const imageFile = fileInput.files[0];
+                console.log(imageFile)
+                const formData = new FormData()
+                const title = document.querySelector("#titreProjet").value
+                const category = document.querySelector("#categorieProjet").value
+                formData.append('title', title);
+                formData.append('image', imageFile);
+                formData.append('category', category);
+                
                 fetch("http://localhost:5678/api/works", {
                     method: "POST",
                     body: formData,
                     headers :{
                         Authorization: `Bearer ${token}`,
-                        "Content-Type": "multipart/form-data", 
                   }, 
                 })
                 .then(res => res.json())
                 .catch(err => console.log(err))
-            }    
+            }) 
 
 }
 
