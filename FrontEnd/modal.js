@@ -77,26 +77,43 @@ const openModal = async function (e) {
         modalSupprimerPhoto.style.display = "block"
     })
 
-    document.getElementById("input").addEventListener("change", function (event) {
-        var output = document.getElementById("output");
-        output.innerHTML = "";
-        var file = event.target.files[0]; 
+    // document.getElementById("input").addEventListener("change", function (event) {
+    //     var output = document.getElementById("output");
+    //     output.innerHTML = "";
+    //     var file = event.target.files[0]; 
       
-        if (file) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            var img = new Image();
-            img.src = e.target.result;
-            img.style.maxWidth = "100%";
-            img.style.maxHeight = "100%";
-            output.appendChild(img); 
-          };
+    //     if (file) {
+    //       var reader = new FileReader();
+    //       reader.onload = function (e) {
+    //         var img = new Image();
+    //         img.src = e.target.result;
+    //         img.style.maxWidth = "100%";
+    //         img.style.maxHeight = "100%";
+    //         output.appendChild(img); 
+    //       };
       
-          reader.readAsDataURL(file); 
-        }
-      });
-      
-      
+    //       reader.readAsDataURL(file); 
+    //     }
+    //   });
+      const form = document.querySelector("#form")
+
+        form.addEventListener("submit", ajouterProjet)
+
+            function ajouterProjet(e) {
+                e.preventDefault()
+                const formData = new FormData(form)
+                const title = formData.get("title")
+                const image = formData.get("image")
+                const category = formData.get("category")
+                
+                console.log("projet", {title}, {image}, {category})
+                fetch("http://localhost:5678/api/works", {
+                    method: "POST",
+                    body: formData,
+                })
+                .then(res => res.json())
+                .catch(err => console.log(err))
+            }    
 
 }
 

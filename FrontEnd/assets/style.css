@@ -529,7 +529,7 @@ option{
 	margin-top: 38px;
 }
 
-.boutonValider button{
+.styleBoutonValider{
 	font-family: 'Syne';
 	font-size: 16px;
 	color: white;
