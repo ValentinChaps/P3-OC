@@ -22,10 +22,12 @@ function genererProjetsAModifier(projets){
         imageElements.src = article.imageUrl
         const titreElements = document.createElement("figcaption")
         titreElements.innerText = 'éditer'
+        const spanTrashIcon = document.createElement("span")
+        spanTrashIcon.classList.add("fa-stack", "fa-sm")
         const trashCanIcon = document.createElement("i")
-        trashCanIcon.classList.add("fa-regular", "fa-trash-can")
-        const fondNoir = document.createElement("div")
-        fondNoir.id = "fondNoir"
+        trashCanIcon.classList.add("fa-solid", "fa-trash-can", "fa-stack-1x","fa-inverse")
+        const carreNoir = document.createElement("i")
+        carreNoir.classList.add("fa-solid", "fa-square", "fa-stack-2x")
 
         projetElements.setAttribute("data-id", article.id)
         const trashCanIcons = document.querySelectorAll(".fa-trash-can");
@@ -40,8 +42,10 @@ function genererProjetsAModifier(projets){
         projetsAModifier.appendChild(projetElements)
         projetElements.appendChild(imageElements)
         projetElements.appendChild(titreElements)
-        projetElements.appendChild(trashCanIcon)
-        trashCanIcon.appendChild(fondNoir)
+        projetElements.appendChild(spanTrashIcon)
+        spanTrashIcon.appendChild(carreNoir)
+        spanTrashIcon.appendChild(trashCanIcon)
+        
     }
 }
 

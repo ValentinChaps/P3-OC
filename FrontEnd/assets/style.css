@@ -407,29 +407,18 @@ footer nav ul {
 
 .projetsAModifier img{
 	width: 90%;
-	z-index: 1;
+	height:110px;
 }
 
 .projetsAModifier img+figcaption{
 	margin-bottom: 0px;
 }
 
-.fa-trash-can{
+.fa-stack{
 	position: relative;
-	bottom: 118px;
-	left: 65px;
-	z-index: 2;
+	bottom: 120px;
+	left: 48px;
 }
-
-#fondNoir{
-	width: 10px;
-  	height: 10px;
-  	background-color: black;
-	position: relative;
-	bottom: 8px;
-	z-index: 1;
-}
-
 
 .boutonsAjouterSupprimer{
 	display: flex;
