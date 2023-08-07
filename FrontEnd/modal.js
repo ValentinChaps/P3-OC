@@ -81,32 +81,54 @@ const openModal = async function (e) {
         modalSupprimerPhoto.style.display = "block"
     })
 
-    // document.getElementById("input").addEventListener("change", function (event) {
-    //     var output = document.getElementById("output");
-    //     output.innerHTML = "";
-    //     var file = event.target.files[0]; 
-      
-    //     if (file) {
-    //       var reader = new FileReader();
-    //       reader.onload = function (e) {
-    //         var img = new Image();
-    //         img.src = e.target.result;
-    //         img.style.maxWidth = "100%";
-    //         img.style.maxHeight = "100%";
-    //         output.appendChild(img); 
-    //       };
-      
-    //       reader.readAsDataURL(file); 
-    //     }
-    //   });
+    const importImage = document.getElementById("input")
+
+    importImage.addEventListener("change", function (event) {
+        const previewImage = importImage.files
+       
+        if(previewImage){
+            const previewImageId = document.getElementById("previewImage")
+            previewImageId.style.display ="block"
+            const uploadPhotoDiv = document.querySelector(".uploadPhoto")
+            const children = uploadPhotoDiv.children
+            for (const child of children) {
+                if (child !== uploadPhotoDiv.querySelector("#previewImage")) {
+                    child.style.display = "none"
+                }
+            }
+            previewImageId.src = window.URL.createObjectURL(this.files[0])
+        }
+        
+    })
+
+    const fileInput = document.getElementById('input')
+    const titleInput = document.querySelector("#titreProjet")
+    const categorySelect = document.querySelector("#categorieProjet")
+    const validerButton = document.querySelector(".styleBoutonValider")
+
+    fileInput.addEventListener('change', changerBoutonCouleur)
+    titleInput.addEventListener('input', changerBoutonCouleur)
+    categorySelect.addEventListener('change', changerBoutonCouleur)
+    
+    function changerBoutonCouleur() {
+        const imageFile = fileInput.files[0]
+        const title = titleInput.value
+        const category = categorySelect.value
+    
+        if (imageFile && title.trim() !== "" && category !== "") {
+            validerButton.style.backgroundColor = "#1D6154"
+        } else {
+            validerButton.style.backgroundColor = ""
+        }
+    }
+
+            
       const form = document.querySelector("#form")
 
         form.addEventListener("submit", function(e){
                 e.preventDefault()
-                
                 const fileInput = document.getElementById('input');
                 const imageFile = fileInput.files[0];
-                console.log(imageFile)
                 const formData = new FormData()
                 const title = document.querySelector("#titreProjet").value
                 const category = document.querySelector("#categorieProjet").value
