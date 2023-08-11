@@ -11,32 +11,48 @@ async function supprimerProjet(id) {
             "Content-Type": "application/json", 
       }, 
   })
+  if (response.ok) {
+    const projetElement = document.querySelector(`[data-id="${id}"]`);
+    if (projetElement) {
+        projetElement.remove()
+    } else {
+        console.log(`Le projet avec l'id "${id}" n'a pas été trouvé.`)
+    }
+} else {
+    console.log("La suppression du projet a échoué.")
 }
 
-function genererProjetsAModifier(projets){
-    for (let i = 0; i < projets.length; i++){
-        const article = projets[i]
-        const projetsAModifier = document.querySelector(".projetsAModifier")
-        const projetElements = document.createElement("div")
-        const imageElements = document.createElement("img")
-        imageElements.src = article.imageUrl
-        const titreElements = document.createElement("figcaption")
-        titreElements.innerText = 'éditer'
-        const spanTrashIcon = document.createElement("span")
-        spanTrashIcon.classList.add("fa-stack", "fa-sm")
-        const trashCanIcon = document.createElement("i")
-        trashCanIcon.classList.add("fa-solid", "fa-trash-can", "fa-stack-1x","fa-inverse")
-        const carreNoir = document.createElement("i")
-        carreNoir.classList.add("fa-solid", "fa-square", "fa-stack-2x")
+}
 
-        projetElements.setAttribute("data-id", article.id)
-        const trashCanIcons = document.querySelectorAll(".fa-trash-can");
-        trashCanIcons.forEach((trashCanIcon) => {
-          trashCanIcon.addEventListener("click", () => {
+function genererProjetsAModifier(projets) {
+    const projetsAModifier = document.querySelector(".projetsAModifier");
+
+    for (let i = 0; i < projets.length; i++) {
+        const article = projets[i];
+
+        const projetElements = document.createElement("div");
+        const imageElements = document.createElement("img");
+        imageElements.src = article.imageUrl;
+
+        const titreElements = document.createElement("figcaption");
+        titreElements.innerText = 'éditer';
+
+        const spanTrashIcon = document.createElement("span");
+        spanTrashIcon.classList.add("fa-stack", "fa-sm");
+
+        const trashCanIcon = document.createElement("i");
+        trashCanIcon.classList.add("fa-solid", "fa-trash-can", "fa-stack-1x", "fa-inverse");
+
+        const carreNoir = document.createElement("i");
+        carreNoir.classList.add("fa-solid", "fa-square", "fa-stack-2x");
+
+        projetElements.setAttribute("data-id", article.id);
+
+        trashCanIcon.addEventListener("click", () => {
             const projetElement = trashCanIcon.closest("[data-id]");
-            const projetId = projetElement.getAttribute("data-id")
-            supprimerProjet(projetId)
-        })});
+            const projetId = projetElement.getAttribute("data-id");
+            supprimerProjet(projetId);
+        });
             
         
         projetsAModifier.appendChild(projetElements)
