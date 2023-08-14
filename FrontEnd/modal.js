@@ -1,5 +1,18 @@
 const reponse = await fetch('http://localhost:5678/api/works');
 const projets = await reponse.json();
+const reponseCategories = await fetch('http://localhost:5678/api/categories')
+const categories = await reponseCategories.json()
+
+function genererCategories(categories) {
+    const choixCategories = document.querySelector("#categorieProjet");
+    for (let i = 0; i < categories.length; i++){
+        const article = categories[i]
+        const categorie = document.createElement("option")
+        categorie.innerText = article.name
+        categorie.value = article.id
+        choixCategories.appendChild(categorie)
+    }
+}
 
 const token = localStorage.getItem("token")
 
@@ -86,6 +99,7 @@ const openModal = async function (e) {
         modalSupprimerPhoto.style.display = "block"
     }
     genererProjetsAModifier(projets)
+    genererCategories(categories)
 
     const ajouterPhotoButton = modal.querySelector("#ajouterPhotoButton")
     const modalAjouterPhoto = document.querySelector(".modalAjouterPhoto")
