@@ -1,3 +1,4 @@
+import { genererProjets } from "./Projets.js";
 const reponse = await fetch('http://localhost:5678/api/works');
 const projets = await reponse.json();
 const reponseCategories = await fetch('http://localhost:5678/api/categories')
@@ -178,9 +179,25 @@ const openModal = async function (e) {
                   }, 
                 })
                 .then(res => res.json())
-                .catch(err => console.log(err))
+                .then(data =>{
+                    genererProjetsAModifier([data])
+                    genererProjets([data])
+                    form.reset()
+                    const previewImageId = document.getElementById("previewImage")
+                    previewImageId.style.display ="none"
+                    const uploadPhotoDiv = document.querySelector(".uploadPhoto")
+                    const children = uploadPhotoDiv.children
+                    for (const child of children) {
+                        if (child !== uploadPhotoDiv.querySelector("#previewImage")) {
+                            child.style.display = "block"
+                        }
+                    }
+                    const inputPhoto = document.querySelector(".inputPhoto")
+                    inputPhoto.style.display ="none"
+                    modalAjouterPhoto.style.display = "none"
+                    modalSupprimerPhoto.style.display = "block"
+                })
             }) 
-
 }
 
 
