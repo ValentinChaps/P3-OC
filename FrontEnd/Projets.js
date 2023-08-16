@@ -1,7 +1,7 @@
 const reponse = await fetch('http://localhost:5678/api/works');
 const projets = await reponse.json();
 
-export function genererProjets(projets){
+export async function genererProjets(projets){
     for (let i = 0; i < projets.length; i++){
         const article = projets[i]
         const sectionGallery = document.querySelector(".gallery")
@@ -10,12 +10,14 @@ export function genererProjets(projets){
         imageElement.src = article.imageUrl
         const titreElement = document.createElement("figcaption")
         titreElement.innerText = article.title
+        projetElement.setAttribute("data-id", article.id);
 
         sectionGallery.appendChild(projetElement)
         projetElement.appendChild(imageElement)
         projetElement.appendChild(titreElement)
     }
 }
+document.querySelector(".gallery").innerHTML = ""
 genererProjets(projets)
 
 const fondToutMesProjets = document.querySelector("#toutMesProjets")

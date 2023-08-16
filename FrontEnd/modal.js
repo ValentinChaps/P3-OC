@@ -6,6 +6,9 @@ const categories = await reponseCategories.json()
 
 function genererCategories(categories) {
     const choixCategories = document.querySelector("#categorieProjet");
+    choixCategories.innerHTML =""
+    const categorieVide = document.createElement("option")
+    choixCategories.appendChild(categorieVide)
     for (let i = 0; i < categories.length; i++){
         const article = categories[i]
         const categorie = document.createElement("option")
@@ -26,9 +29,9 @@ async function supprimerProjet(id) {
       }, 
   })
   if (response.ok) {
-    const projetElement = document.querySelector(`[data-id="${id}"]`);
-    if (projetElement) {
-        projetElement.remove()
+    const projetElements = document.querySelector(`[data-id="${id}"]`);
+    if (projetElements) {
+        projetElements.remove()
     } else {
         console.log(`Le projet avec l'id "${id}" n'a pas été trouvé.`)
     }
@@ -39,33 +42,34 @@ async function supprimerProjet(id) {
 }
 
 function genererProjetsAModifier(projets) {
-    const projetsAModifier = document.querySelector(".projetsAModifier");
+    const projetsAModifier = document.querySelector(".projetsAModifier")
 
     for (let i = 0; i < projets.length; i++) {
         const article = projets[i];
 
-        const projetElements = document.createElement("div");
-        const imageElements = document.createElement("img");
+        const projetElements = document.createElement("div")
+        const imageElements = document.createElement("img")
         imageElements.src = article.imageUrl;
 
-        const titreElements = document.createElement("figcaption");
-        titreElements.innerText = 'éditer';
+        const titreElements = document.createElement("figcaption")
+        titreElements.innerText = 'éditer'
 
-        const spanTrashIcon = document.createElement("span");
-        spanTrashIcon.classList.add("fa-stack", "fa-sm");
+        const spanTrashIcon = document.createElement("span")
+        spanTrashIcon.classList.add("fa-stack", "fa-sm")
 
-        const trashCanIcon = document.createElement("i");
-        trashCanIcon.classList.add("fa-solid", "fa-trash-can", "fa-stack-1x", "fa-inverse");
+        const trashCanIcon = document.createElement("i")
+        trashCanIcon.classList.add("fa-solid", "fa-trash-can", "fa-stack-1x", "fa-inverse")
 
-        const carreNoir = document.createElement("i");
-        carreNoir.classList.add("fa-solid", "fa-square", "fa-stack-2x");
+        const carreNoir = document.createElement("i")
+        carreNoir.classList.add("fa-solid", "fa-square", "fa-stack-2x")
 
-        projetElements.setAttribute("data-id", article.id);
+        projetElements.setAttribute("data-id", article.id)
 
-        trashCanIcon.addEventListener("click", () => {
-            const projetElement = trashCanIcon.closest("[data-id]");
-            const projetId = projetElement.getAttribute("data-id");
-            supprimerProjet(projetId);
+        trashCanIcon.addEventListener("click", async () => {
+            const projetElement = trashCanIcon.closest("[data-id]")
+            const projetId = projetElement.getAttribute("data-id")
+            await supprimerProjet(projetId)
+            projetElement.remove()
         });
             
         
@@ -158,46 +162,48 @@ const openModal = async function (e) {
     }
 
             
-      const form = document.querySelector("#form")
-
-        form.addEventListener("submit", function(e){
-                e.preventDefault()
-                const fileInput = document.getElementById('input');
-                const imageFile = fileInput.files[0];
-                const formData = new FormData()
-                const title = document.querySelector("#titreProjet").value
-                const category = document.querySelector("#categorieProjet").value
-                formData.append('title', title);
-                formData.append('image', imageFile);
-                formData.append('category', category);
-                
-                fetch("http://localhost:5678/api/works", {
-                    method: "POST",
-                    body: formData,
-                    headers :{
-                        Authorization: `Bearer ${token}`,
-                  }, 
-                })
-                .then(res => res.json())
-                .then(data =>{
-                    genererProjetsAModifier([data])
-                    genererProjets([data])
-                    form.reset()
-                    const previewImageId = document.getElementById("previewImage")
-                    previewImageId.style.display ="none"
-                    const uploadPhotoDiv = document.querySelector(".uploadPhoto")
-                    const children = uploadPhotoDiv.children
-                    for (const child of children) {
-                        if (child !== uploadPhotoDiv.querySelector("#previewImage")) {
-                            child.style.display = "block"
-                        }
+    const form = document.querySelector("#form")
+    if (!form.hasAttribute("data-submit-attached")){
+    form.setAttribute("data-submit-attached", "true")
+    form.addEventListener("submit", function(e){
+            e.preventDefault()
+            const fileInput = document.getElementById('input')
+            const imageFile = fileInput.files[0];
+            const formData = new FormData()
+            const title = document.querySelector("#titreProjet").value
+            const category = document.querySelector("#categorieProjet").value
+            formData.append('title', title)
+            formData.append('image', imageFile)
+            formData.append('category', category)
+            
+            fetch("http://localhost:5678/api/works", {
+                method: "POST",
+                body: formData,
+                headers :{
+                    Authorization: `Bearer ${token}`,
+                }, 
+            })
+            .then(res => res.json())
+            .then(data =>{
+                genererProjetsAModifier([data])
+                genererProjets([data])
+                form.reset()
+                const previewImageId = document.getElementById("previewImage")
+                previewImageId.style.display ="none"
+                const uploadPhotoDiv = document.querySelector(".uploadPhoto")
+                const children = uploadPhotoDiv.children
+                for (const child of children) {
+                    if (child !== uploadPhotoDiv.querySelector("#previewImage")) {
+                        child.style.display = "block"
                     }
-                    const inputPhoto = document.querySelector(".inputPhoto")
-                    inputPhoto.style.display ="none"
-                    modalAjouterPhoto.style.display = "none"
-                    modalSupprimerPhoto.style.display = "block"
-                })
-            }) 
+                }
+                const inputPhoto = document.querySelector(".inputPhoto")
+                inputPhoto.style.display ="none"
+                modalAjouterPhoto.style.display = "none"
+                modalSupprimerPhoto.style.display = "block"
+            })
+        }) 
+    }
 }
 
 

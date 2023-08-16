@@ -372,8 +372,13 @@ footer nav ul {
 	padding: 20px;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh- 20px);
-	overflow: auto;
+	
 	border-radius: 15px;
+}
+
+#modalSupprimerPhoto{
+	overflow: auto;
+	height: 700px;
 }
 
 .js-modal-close{
@@ -388,7 +393,7 @@ footer nav ul {
 	justify-content: center;
 	color: black;
 	font-weight: lighter;
-	margin-bottom: 60px;
+	margin-bottom: 50px;
 }
 
 .projetsAModifier{
@@ -401,8 +406,8 @@ footer nav ul {
 	margin: auto;
 	overflow: auto;
 	border-bottom: 3px solid rgb(201, 189, 189) ;
-	padding-bottom: 30px;
-	margin-bottom: 40px;
+	padding-bottom: 15px;
+	margin-bottom: 30px;
 }
 
 .projetsAModifier img{
