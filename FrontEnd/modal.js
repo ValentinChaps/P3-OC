@@ -3,8 +3,61 @@ const reponse = await fetch('http://localhost:5678/api/works');
 const projets = await reponse.json();
 const reponseCategories = await fetch('http://localhost:5678/api/categories')
 const categories = await reponseCategories.json()
+const token = localStorage.getItem("token")
 
-function genererCategories(categories) {
+async function ajouterProjet(e){
+    e.preventDefault()
+    const fileInput = document.getElementById('input')
+    const imageFile = fileInput.files[0];
+    const formData = new FormData()
+    const title = document.querySelector("#titreProjet").value
+    const category = document.querySelector("#categorieProjet").value
+    formData.append('title', title)
+    formData.append('image', imageFile)
+    formData.append('category', category)
+    
+    if(imageFile && title.trim() !== "" && category !== ""){
+        fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        body: formData,
+        headers :{
+            Authorization: `Bearer ${token}`,
+        }, 
+        })
+        .then(res => res.json())
+        .then(data =>{
+            genererProjetsAModifier([data])
+            genererProjets([data])
+            form.reset()
+            const previewImageId = document.getElementById("previewImage")
+            previewImageId.style.display ="none"
+            const uploadPhotoDiv = document.querySelector(".uploadPhoto")
+            const children = uploadPhotoDiv.children
+            for (const child of children) {
+                if (child !== uploadPhotoDiv.querySelector("#previewImage")) {
+                    child.style.display = "block"
+                }
+            }
+            const inputPhoto = document.querySelector(".inputPhoto")
+            inputPhoto.style.display ="none"
+            const modalAjouterPhoto = document.querySelector(".modalAjouterPhoto")
+            modalAjouterPhoto.style.display = "none"
+            
+            const modalSupprimerPhoto = document.querySelector("#modalSupprimerPhoto")
+            modalSupprimerPhoto.style.display = "block"
+            
+            const messageErreur = document.querySelector("#messageErreur")
+            messageErreur.style.display = "none"
+
+            const styleBoutonValider = document.querySelector(".styleBoutonValider")
+            styleBoutonValider.style.backgroundColor = "gray"
+        })
+    }else{
+        messageErreur.style.display = "inline"
+    }
+}
+
+async function genererCategories(categories) {
     const choixCategories = document.querySelector("#categorieProjet");
     choixCategories.innerHTML =""
     const categorieVide = document.createElement("option")
@@ -17,8 +70,6 @@ function genererCategories(categories) {
         choixCategories.appendChild(categorie)
     }
 }
-
-const token = localStorage.getItem("token")
 
 async function supprimerProjet(id) {
     const response = await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -35,13 +86,13 @@ async function supprimerProjet(id) {
     } else {
         console.log(`Le projet avec l'id "${id}" n'a pas été trouvé.`)
     }
-} else {
-    console.log("La suppression du projet a échoué.")
-}
+    } else {
+        console.log("La suppression du projet a échoué.")
+    }
 
 }
 
-function genererProjetsAModifier(projets) {
+async function genererProjetsAModifier(projets) {
     const projetsAModifier = document.querySelector(".projetsAModifier")
 
     for (let i = 0; i < projets.length; i++) {
@@ -71,18 +122,20 @@ function genererProjetsAModifier(projets) {
             await supprimerProjet(projetId)
             projetElement.remove()
         });
-            
-        
         projetsAModifier.appendChild(projetElements)
         projetElements.appendChild(imageElements)
         projetElements.appendChild(titreElements)
         projetElements.appendChild(spanTrashIcon)
         spanTrashIcon.appendChild(carreNoir)
-        spanTrashIcon.appendChild(trashCanIcon)
-        
+        spanTrashIcon.appendChild(trashCanIcon) 
     }
 }
 
+genererProjetsAModifier(projets)
+genererCategories(categories)
+
+const form = document.querySelector("#form")   
+form.addEventListener("submit", ajouterProjet)    
 
 let modal = null
 const focusaleSelector ="button, a, input, textarea"
@@ -90,10 +143,7 @@ let focusables =[]
 
 const openModal = async function (e) {
     e.preventDefault()
-    const target = e.target.getAttribute("href")
-    modal = await loadModal(target)
-    focusables = Array.from(modal.querySelectorAll(focusaleSelector))
-    focusables[0].focus()
+    modal = document.querySelector( e.target.getAttribute("href"))
     modal.style.display = null
     modal.removeAttribute("aria-hidden")
     modal.setAttribute("aria-modal","true")
@@ -103,10 +153,7 @@ const openModal = async function (e) {
     if (modalSupprimerPhoto.style.display = "none"){
         modalSupprimerPhoto.style.display = "block"
     }
-    genererProjetsAModifier(projets)
-    genererCategories(categories)
-
-    const ajouterPhotoButton = modal.querySelector("#ajouterPhotoButton")
+    const ajouterPhotoButton = document.querySelector("#ajouterPhotoButton")
     const modalAjouterPhoto = document.querySelector(".modalAjouterPhoto")
     modalAjouterPhoto.style.display = "none"
     ajouterPhotoButton.addEventListener("click", () => {
@@ -121,10 +168,8 @@ const openModal = async function (e) {
     })
 
     const importImage = document.getElementById("input")
-
     importImage.addEventListener("change", function (event) {
         const previewImage = importImage.files
-       
         if(previewImage){
             const previewImageId = document.getElementById("previewImage")
             previewImageId.style.display ="block"
@@ -137,14 +182,12 @@ const openModal = async function (e) {
             }
             previewImageId.src = window.URL.createObjectURL(this.files[0])
         }
-        
     })
 
     const fileInput = document.getElementById('input')
     const titleInput = document.querySelector("#titreProjet")
     const categorySelect = document.querySelector("#categorieProjet")
     const validerButton = document.querySelector(".styleBoutonValider")
-
     fileInput.addEventListener('change', changerBoutonCouleur)
     titleInput.addEventListener('input', changerBoutonCouleur)
     categorySelect.addEventListener('change', changerBoutonCouleur)
@@ -160,53 +203,8 @@ const openModal = async function (e) {
             validerButton.style.backgroundColor = ""
         }
     }
-
-            
-    const form = document.querySelector("#form")
-    if (!form.hasAttribute("data-submit-attached")){
-    form.setAttribute("data-submit-attached", "true")
-    form.addEventListener("submit", function(e){
-            e.preventDefault()
-            const fileInput = document.getElementById('input')
-            const imageFile = fileInput.files[0];
-            const formData = new FormData()
-            const title = document.querySelector("#titreProjet").value
-            const category = document.querySelector("#categorieProjet").value
-            formData.append('title', title)
-            formData.append('image', imageFile)
-            formData.append('category', category)
-            
-            fetch("http://localhost:5678/api/works", {
-                method: "POST",
-                body: formData,
-                headers :{
-                    Authorization: `Bearer ${token}`,
-                }, 
-            })
-            .then(res => res.json())
-            .then(data =>{
-                genererProjetsAModifier([data])
-                genererProjets([data])
-                form.reset()
-                const previewImageId = document.getElementById("previewImage")
-                previewImageId.style.display ="none"
-                const uploadPhotoDiv = document.querySelector(".uploadPhoto")
-                const children = uploadPhotoDiv.children
-                for (const child of children) {
-                    if (child !== uploadPhotoDiv.querySelector("#previewImage")) {
-                        child.style.display = "block"
-                    }
-                }
-                const inputPhoto = document.querySelector(".inputPhoto")
-                inputPhoto.style.display ="none"
-                modalAjouterPhoto.style.display = "none"
-                modalSupprimerPhoto.style.display = "block"
-            })
-        }) 
-    }
 }
-
-
+   
 const closeModal = function (e) {
     if (modal === null) return
     e.preventDefault()
@@ -216,7 +214,6 @@ const closeModal = function (e) {
     modal.removeEventListener("click", closeModal)
     modal.querySelector(".js-modal-close").removeEventListener("click", closeModal)
     modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation)
-    document.querySelector(".projetsAModifier").innerHTML = ""
     modal = null
 }
 
@@ -241,20 +238,8 @@ const focusInModal = function(e){
     focusables[index].focus()
 }
 
-const loadModal = async function (url) {
-    const target = "#" + url.split("#")[1]
-    const existingModal = document.querySelector(target)
-    if(existingModal !== null) return existingModal
-    const html = await fetch(url).then(response => response.text())
-    const element = document.createRange().createContextualFragment(html).querySelector(target)
-    if (element === null) throw `L'élément ${target} n'a pas été trouvé dans la page ${url}`
-    document.body.append(element)
-    return element
-}
-
 const lienModal = document.querySelector(".js-modal")
 lienModal.addEventListener("click", openModal)
-
 
 window.addEventListener("keydown", function(e){
     if (e.key === "Escape" || e.key === "Esc"){
