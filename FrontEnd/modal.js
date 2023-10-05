@@ -80,12 +80,12 @@ async function supprimerProjet(id) {
       }, 
   })
   if (response.ok) {
-    const projetElements = document.querySelector(`[data-id="${id}"]`);
-    if (projetElements) {
-        projetElements.remove()
-    } else {
-        console.log(`Le projet avec l'id "${id}" n'a pas été trouvé.`)
-    }
+        const projetElements = document.querySelector(`[data-id="${id}"]`);
+        if (projetElements) {
+            projetElements.remove()
+        } else {
+            console.log(`Le projet avec l'id "${id}" n'a pas été trouvé.`)
+        }
     } else {
         console.log("La suppression du projet a échoué.")
     }
@@ -169,18 +169,33 @@ const openModal = async function (e) {
 
     const importImage = document.getElementById("input")
     importImage.addEventListener("change", function (event) {
-        const previewImage = importImage.files
-        if(previewImage){
-            const previewImageId = document.getElementById("previewImage")
-            previewImageId.style.display ="block"
-            const uploadPhotoDiv = document.querySelector(".uploadPhoto")
-            const children = uploadPhotoDiv.children
-            for (const child of children) {
-                if (child !== uploadPhotoDiv.querySelector("#previewImage")) {
-                    child.style.display = "none"
+        const file = this.files[0]
+        if(file){
+            if(file.size <= 4 * 1024 * 1024){
+                const extensionAutorise = [".png", ".jpg", ".jpeg"]
+                const fileName = file.name.toLowerCase()
+                const fileExtension = fileName.substring(fileName.lastIndexOf("."))
+    
+                if (extensionAutorise.includes(fileExtension)){
+                    const fileId = document.getElementById("previewImage")
+                    fileId.style.display ="block"
+                    const uploadPhotoDiv = document.querySelector(".uploadPhoto")
+                    const children = uploadPhotoDiv.children
+                    for (const child of children) {
+                        if (child !== uploadPhotoDiv.querySelector("#previewImage")) {
+                            child.style.display = "none"
+                        }
+                    }
+                    fileId.src = window.URL.createObjectURL(this.files[0])
+                    URL.revokeObjectURL(this.files[0])
+                } else {
+                    alert("Veuillez sélectionner un fichier PNG ou JPG.")
+                    this.value =""
                 }
+            } else {
+                alert("Veuillez sélectionner un fichier de 4mo ou moins.")
+                this.value = ""
             }
-            previewImageId.src = window.URL.createObjectURL(this.files[0])
         }
     })
 

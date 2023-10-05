@@ -88,8 +88,13 @@ boutonHotelsEtRestaurants.addEventListener("click", function (){
     genererProjets(projetsFiltres)
 })
 
-const token = localStorage.getItem("token")
+let token = localStorage.getItem("token")
+
 if (token) {
+    const logout = document.querySelector("#logout")
+    logout.style.display = "flex"
+    const login = document.querySelector("#login")
+    login.style.display = "none"
     const encadreNoir = document.querySelector("#encadreNoir")
     encadreNoir.style.display = "flex"
     const header = document.querySelector("header")
@@ -103,3 +108,10 @@ if (token) {
         boutonModifier.style.display = "inline"
     })
 }
+
+logout.addEventListener("click", function (){
+    localStorage.removeItem("token")
+    window.location.reload()
+})
+
+

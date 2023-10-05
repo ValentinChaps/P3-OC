@@ -324,7 +324,7 @@ footer nav ul {
 	border-radius: 60px ;
 }
 
-#messageErreur{
+#messageErreurLog{
 	color: red;
 }
 
@@ -567,4 +567,9 @@ option .fa-chevron-down{
 	position: fixed;
     bottom: 20px;
     right: 50px
+}
+
+#logout{
+	display: none;
+	font-weight: bold;
 }

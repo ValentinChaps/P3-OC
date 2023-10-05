@@ -14,26 +14,34 @@ boutonSeConnecter.addEventListener("click", function (event){
               password: inputMotDePasse.value
             })
           })
-            .then(response => response.json())
+            .then(response => {
+              if(!response.ok){
+                console.log(response.status)
+                throw new Error(response.status)
+              }
+              return response.json()
+            })
+
             .then(data => {
               if(data.token){
               token = data.token
               localStorage.setItem("token", token)
               event.preventDefault()
               window.location.href = "index.html"
-              console.log(token)
-            } else{
-              const erreur = document.querySelector("#messageErreur")
-              erreur.innerHTML = "L'email ou le mot de passe est incorrect"
-            }
+            } 
             })
             .catch(error => {
-              console.log("Une erreur s'est produite :", error)
+              console.log(error)
+              const erreur = document.querySelector("#messageErreurLog")
+              if(error == "Error: 404"){
+                erreur.innerHTML = "L'email ou le mot de passe est incorrect."
+              } else{
+                erreur.innerHTML = "Le mot de passe est incorrect."
+              }          
             })
     }
     else{
-        const erreur = document.querySelector("#messageErreur")
-        erreur.innerHTML = "L'email ou le mot de passe est incorrect"
-        
+        const erreur = document.querySelector("#messageErreurLog")
+        erreur.innerHTML = "Le champs Mot de passe ou E-mail est vide." 
     }
 })
