@@ -36,7 +36,7 @@ boutonSeConnecter.addEventListener("click", function (event){
             .catch(error => {
               console.log(error)
               const erreur = document.querySelector("#messageErreurLog")
-              erreur.innerText = error;        
+              erreur.innerText = error.message.replace("Error: ", "")      
             })
     }
     else{

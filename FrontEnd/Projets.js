@@ -1,5 +1,5 @@
-const reponse = await fetch('http://localhost:5678/api/works');
-const projets = await reponse.json();
+const reponse = await fetch('http://localhost:5678/api/works')
+const projets = await reponse.json()
 
 export async function genererProjets(projets){
     for (let i = 0; i < projets.length; i++){
@@ -10,7 +10,7 @@ export async function genererProjets(projets){
         imageElement.src = article.imageUrl
         const titreElement = document.createElement("figcaption")
         titreElement.innerText = article.title
-        projetElement.setAttribute("data-id", article.id);
+        projetElement.setAttribute("data-id", article.id)
 
         sectionGallery.appendChild(projetElement)
         projetElement.appendChild(imageElement)
