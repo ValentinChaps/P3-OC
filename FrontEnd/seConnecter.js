@@ -17,8 +17,11 @@ boutonSeConnecter.addEventListener("click", function (event){
             .then(response => {
               if(!response.ok){
                 console.log(response.status)
-                throw new Error(response.status)
-              }
+                if(response.status == 404){
+                  throw new Error("Utilisateur non trouvé")
+                } else if(response.status == 401){
+                  throw new Error("Mot de passe incorrect")
+                }}
               return response.json()
             })
 
@@ -33,15 +36,11 @@ boutonSeConnecter.addEventListener("click", function (event){
             .catch(error => {
               console.log(error)
               const erreur = document.querySelector("#messageErreurLog")
-              if(error == "Error: 404"){
-                erreur.innerHTML = "L'email ou le mot de passe est incorrect."
-              } else{
-                erreur.innerHTML = "Le mot de passe est incorrect."
-              }          
+              erreur.innerText = error;        
             })
     }
     else{
         const erreur = document.querySelector("#messageErreurLog")
-        erreur.innerHTML = "Le champs Mot de passe ou E-mail est vide." 
+        erreur.innerText = "Le champ Mot de passe ou E-mail est vide." 
     }
 })

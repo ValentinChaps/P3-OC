@@ -1,6 +1,6 @@
-import { genererProjets } from "./Projets.js";
-const reponse = await fetch('http://localhost:5678/api/works');
-const projets = await reponse.json();
+import { genererProjets } from "./projets.js"
+const reponse = await fetch('http://localhost:5678/api/works')
+const projets = await reponse.json()
 const reponseCategories = await fetch('http://localhost:5678/api/categories')
 const categories = await reponseCategories.json()
 const token = localStorage.getItem("token")
@@ -8,7 +8,7 @@ const token = localStorage.getItem("token")
 async function ajouterProjet(e){
     e.preventDefault()
     const fileInput = document.getElementById('input')
-    const imageFile = fileInput.files[0];
+    const imageFile = fileInput.files[0]
     const formData = new FormData()
     const title = document.querySelector("#titreProjet").value
     const category = document.querySelector("#categorieProjet").value
@@ -58,7 +58,7 @@ async function ajouterProjet(e){
 }
 
 async function genererCategories(categories) {
-    const choixCategories = document.querySelector("#categorieProjet");
+    const choixCategories = document.querySelector("#categorieProjet")
     choixCategories.innerHTML =""
     const categorieVide = document.createElement("option")
     choixCategories.appendChild(categorieVide)
@@ -80,7 +80,7 @@ async function supprimerProjet(id) {
       }, 
   })
   if (response.ok) {
-        const projetElements = document.querySelector(`[data-id="${id}"]`);
+        const projetElements = document.querySelector(`[data-id="${id}"]`)
         if (projetElements) {
             projetElements.remove()
         } else {
@@ -100,7 +100,7 @@ async function genererProjetsAModifier(projets) {
 
         const projetElements = document.createElement("div")
         const imageElements = document.createElement("img")
-        imageElements.src = article.imageUrl;
+        imageElements.src = article.imageUrl
 
         const titreElements = document.createElement("figcaption")
         titreElements.innerText = 'éditer'
@@ -121,7 +121,7 @@ async function genererProjetsAModifier(projets) {
             const projetId = projetElement.getAttribute("data-id")
             await supprimerProjet(projetId)
             projetElement.remove()
-        });
+        })
         projetsAModifier.appendChild(projetElements)
         projetElements.appendChild(imageElements)
         projetElements.appendChild(titreElements)
@@ -187,7 +187,9 @@ const openModal = async function (e) {
                         }
                     }
                     fileId.src = window.URL.createObjectURL(this.files[0])
-                    URL.revokeObjectURL(this.files[0])
+                    fileId.onload = () =>  {
+                        URL.revokeObjectURL(fileId.src)
+                     }
                 } else {
                     alert("Veuillez sélectionner un fichier PNG ou JPG.")
                     this.value =""
